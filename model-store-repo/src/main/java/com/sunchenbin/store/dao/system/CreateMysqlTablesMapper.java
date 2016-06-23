@@ -14,7 +14,7 @@ import com.sunchenbin.store.command.SysMysqlColumns;
  * @author sunchenbin
  *
  */
-public interface CreateTablesMapper {
+public interface CreateMysqlTablesMapper {
 
 	/**
 	 * 根据结构注解解析出来的信息创建表

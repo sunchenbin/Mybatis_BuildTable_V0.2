@@ -1,10 +1,10 @@
 package com.sunchenbin.store.command;
 
 /**
- * 用于查询表中字段详细信息
- * 
+ * 用于查询表中字段结构详细信息
+ *
  * @author sunchenbin
- * 
+ * @version 2016年6月23日 下午6:10:56 
  */
 public class SysMysqlColumns {
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.sunchenbin.store.dao.system.CreateTablesMapper">
+<mapper namespace="com.sunchenbin.store.dao.system.CreateMysqlTablesMapper">
 
 	<!-- 抽取出来的公共部分 -->
 	<sql id="commonSql">

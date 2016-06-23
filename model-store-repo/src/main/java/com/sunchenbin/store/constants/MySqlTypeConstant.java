@@ -2,6 +2,17 @@ package com.sunchenbin.store.constants;
 
 import com.sunchenbin.store.annotation.LengthCount;
 
+
+/**
+ * 用于配置Mysql数据库中类型，并且该类型需要设置几个长度
+ * 这里配置多少个类型觉得了，创建表能使用多少类型
+ * 例如：varchar(1)
+ *     double(5,2)
+ *     datetime
+ *
+ * @author sunchenbin
+ * @version 2016年6月23日 下午5:59:33 
+ */
 public class MySqlTypeConstant {
 
 	@LengthCount

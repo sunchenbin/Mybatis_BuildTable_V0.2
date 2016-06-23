@@ -1,9 +1,10 @@
 package com.sunchenbin.store.command;
 
 /**
- * 用于创建表的字段
- * 
+ * 用于存放创建表的字段信息
+ *
  * @author sunchenbin
+ * @version 2016年6月23日 下午6:11:17 
  */
 public class CreateTableParam{
 
