@@ -9,26 +9,29 @@ import com.sunchenbin.store.constants.MySqlTypeConstant;
 @Table(name = "test")
 public class Test{
 
-	@Column(name = "id",type = MySqlTypeConstant.INT,length = 11,isKey = true,isNull = false,isAutoIncrement = true)
+	@Column(name = "id",type = MySqlTypeConstant.INT,length = 11)
 	private int		id;
 
-	@Column(name = "name",type = MySqlTypeConstant.VARCHAR,length = 255)
+	@Column(name = "name",type = MySqlTypeConstant.VARCHAR,length = 111)
 	private String	name;
 
-	@Column(name = "description",type = MySqlTypeConstant.VARCHAR,length = 100)
+	@Column(name = "description",type = MySqlTypeConstant.TEXT,length = 100)
 	private String	description;
 
 	@Column(name = "create_time",type = MySqlTypeConstant.DATETIME,length = 0)
 	private Date	create_time;
+	//
+	// @Column(name = "update_time", type = MySqlTypeConstant.DATETIME, length = 0)
+	// private Date update_time;
 
-	@Column(name = "update_time", type = MySqlTypeConstant.DATETIME, length = 0)
-	private Date	update_time;
-
-	@Column(name = "number",type = MySqlTypeConstant.DECIMAL,length = 5,decimalLength = 1)
+	@Column(name = "number",type = MySqlTypeConstant.DECIMAL,length = 5,decimalLength = 1,isKey = true,isNull = false)
 	private Long	number;
 
 	@Column(name = "lifecycle",type = MySqlTypeConstant.CHAR,length = 1)
 	private String	lifecycle;
+
+	@Column(name = "dekes",type = MySqlTypeConstant.DOUBLE,length = 5,decimalLength = 2)
+	private Double	dekes;
 
 	public int getId(){
 		return id;
@@ -54,13 +57,13 @@ public class Test{
 		this.create_time = create_time;
 	}
 
-	public Date getUpdate_time(){
-		return update_time;
-	}
-
-	public void setUpdate_time(Date update_time){
-		this.update_time = update_time;
-	}
+	// public Date getUpdate_time(){
+	// return update_time;
+	// }
+	//
+	// public void setUpdate_time(Date update_time){
+	// this.update_time = update_time;
+	// }
 
 	public String getDescription(){
 		return description;
@@ -84,6 +87,14 @@ public class Test{
 
 	public void setLifecycle(String lifecycle){
 		this.lifecycle = lifecycle;
+	}
+
+	public Double getDekes(){
+		return dekes;
+	}
+
+	public void setDekes(Double dekes){
+		this.dekes = dekes;
 	}
 
 }

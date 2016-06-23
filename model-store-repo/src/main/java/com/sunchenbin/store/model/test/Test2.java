@@ -9,7 +9,7 @@ import com.sunchenbin.store.constants.MySqlTypeConstant;
 @Table(name = "test2")
 public class Test2{
 
-	@Column(name = "id",type = MySqlTypeConstant.INT,length = 11,isNull = false)
+	@Column(name = "id",type = MySqlTypeConstant.INT,length = 11,isNull = false,isKey = true,isAutoIncrement = true)
 	private int		id;
 
 	@Column(name = "name",type = MySqlTypeConstant.VARCHAR,length = 100,defaultValue="dsfw")
@@ -21,7 +21,7 @@ public class Test2{
 	@Column(name = "update_time",type = MySqlTypeConstant.DATETIME,length = 111,isNull=false)
 	private Date	update_time;
 
-	@Column(name = "number",type = MySqlTypeConstant.INT,length = 8,isKey = true,isAutoIncrement = true)
+	@Column(name = "number",type = MySqlTypeConstant.INT,length = 8)
 	private Long	number;
 
 	@Column(name = "lifecycle",type = MySqlTypeConstant.CHAR,length = 3)
