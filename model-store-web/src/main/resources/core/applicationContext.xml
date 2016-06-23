@@ -65,7 +65,6 @@
 		<!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->
 		<property name="mapperLocations" value="classpath*:com/sunchenbin/store/mapping/*/*.xml" />
 		<property name="typeAliasesPackage" value="com.sunchenbin.store.model.*,com.sunchenbin.store.command" />
-		<!-- <property name="configLocation" value="classpath:core/mybatis-configuration.xml" /> -->
 	</bean>
 	
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">

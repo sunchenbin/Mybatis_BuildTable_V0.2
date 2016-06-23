@@ -22,7 +22,7 @@ import com.sunchenbin.store.annotation.Table;
 import com.sunchenbin.store.command.CreateTableParam;
 import com.sunchenbin.store.command.SysMysqlColumns;
 import com.sunchenbin.store.constants.MySqlTypeConstant;
-import com.sunchenbin.store.dao.system.CreateTablesMapper;
+import com.sunchenbin.store.dao.system.CreateMysqlTablesMapper;
 import com.sunchenbin.store.feilong.core.util.CollectionsUtil;
 import com.sunchenbin.store.feilong.core.util.Validator;
 import com.sunchenbin.store.utils.ClassTools;
@@ -41,14 +41,16 @@ public class SysMysqlCreateTableManagerImpl implements SysMysqlCreateTableManage
 	private static final Logger	log	= LoggerFactory.getLogger(SysMysqlCreateTableManagerImpl.class);
 
 	@Autowired
-	private CreateTablesMapper	createTablesMapper;
+	private CreateMysqlTablesMapper	createMysqlTablesMapper;
+	
+	public static String pack = "com.sunchenbin.store.model";
 
 	/**
 	 * 读取配置文件的三种状态（创建表、更新表、不做任何事情）
 	 */
 	@PostConstruct
 	public void createMysqlTable(){
-		String pack = "com.sunchenbin.store.model";
+		
 		Map<String, Object> mySqlTypeAndLengthMap = mySqlTypeAndLengthMap();
 
 		Set<Class<?>> classes = ClassTools.getClasses(pack);
@@ -113,14 +115,14 @@ public class SysMysqlCreateTableManagerImpl implements SysMysqlCreateTableManage
 			tableFieldsConstruct(mySqlTypeAndLengthMap, clas, newFieldList);
 
 			// 先查该表是否以存在
-			int exist = createTablesMapper.findTableCountByTableName(table.name());
+			int exist = createMysqlTablesMapper.findTableCountByTableName(table.name());
 
 			// 不存在时
 			if (exist == 0) {
 				newTableMap.put(table.name(), newFieldList);
 			}else{
 				// 已存在时理论上做修改的操作，这里查出该表的结构
-				List<SysMysqlColumns> tableColumnList = createTablesMapper.findTableEnsembleByTableName(table.name());
+				List<SysMysqlColumns> tableColumnList = createMysqlTablesMapper.findTableEnsembleByTableName(table.name());
 
 				// 从sysColumns中取出我们需要比较的列的List
 				// 先取出name用来筛选出增加和删除的字段
@@ -447,7 +449,7 @@ public class SysMysqlCreateTableManagerImpl implements SysMysqlCreateTableManage
 					map.put(entry.getKey(), obj);
 					CreateTableParam fieldProperties = (CreateTableParam) obj;
 					log.info("开始修改表" + entry.getKey() + "中的字段" + fieldProperties.getFieldName());
-					createTablesMapper.modifyTableField(map);
+					createMysqlTablesMapper.modifyTableField(map);
 					log.info("完成修改表" + entry.getKey() + "中的字段" + fieldProperties.getFieldName());
 				}
 			}
@@ -468,7 +470,7 @@ public class SysMysqlCreateTableManagerImpl implements SysMysqlCreateTableManage
 					map.put(entry.getKey(), obj);
 					String fieldName = (String) obj;
 					log.info("开始删除表" + entry.getKey() + "中的字段" + fieldName);
-					createTablesMapper.removeTableField(map);
+					createMysqlTablesMapper.removeTableField(map);
 					log.info("完成删除表" + entry.getKey() + "中的字段" + fieldName);
 				}
 			}
@@ -489,7 +491,7 @@ public class SysMysqlCreateTableManagerImpl implements SysMysqlCreateTableManage
 					map.put(entry.getKey(), obj);
 					CreateTableParam fieldProperties = (CreateTableParam) obj;
 					log.info("开始为表" + entry.getKey() + "增加字段" + fieldProperties.getFieldName());
-					createTablesMapper.addTableField(map);
+					createMysqlTablesMapper.addTableField(map);
 					log.info("完成为表" + entry.getKey() + "增加字段" + fieldProperties.getFieldName());
 				}
 			}
@@ -510,7 +512,7 @@ public class SysMysqlCreateTableManagerImpl implements SysMysqlCreateTableManage
 					map.put(entry.getKey(), obj);
 					CreateTableParam fieldProperties = (CreateTableParam) obj;
 					log.info("开始为表" + entry.getKey() + "删除主键" + fieldProperties.getFieldName());
-					createTablesMapper.dropKeyTableField(map);
+					createMysqlTablesMapper.dropKeyTableField(map);
 					log.info("完成为表" + entry.getKey() + "删除主键" + fieldProperties.getFieldName());
 				}
 			}
@@ -529,7 +531,7 @@ public class SysMysqlCreateTableManagerImpl implements SysMysqlCreateTableManage
 				Map<String, List<Object>> map = new HashMap<String, List<Object>>();
 				map.put(entry.getKey(), entry.getValue());
 				log.info("开始创建表：" + entry.getKey());
-				createTablesMapper.createTable(map);
+				createMysqlTablesMapper.createTable(map);
 				log.info("完成创建表：" + entry.getKey());
 			}
 		}

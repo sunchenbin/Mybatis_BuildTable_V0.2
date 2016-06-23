@@ -32,14 +32,6 @@
 		<level value="info" />
 	</logger>
 	
-	<!-- 打印myBatis的sql语句 -->
-    <category name="java.sql">
-        <priority value="debug" />
-    </category>
-    <category name="META-INF.ibatis">
-        <priority value="error" />
-    </category>
-
 	<!-- Root Logger -->
 	<root>
 		<priority value="warn" />

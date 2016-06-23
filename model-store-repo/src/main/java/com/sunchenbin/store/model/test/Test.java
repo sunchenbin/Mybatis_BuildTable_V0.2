@@ -9,7 +9,7 @@ import com.sunchenbin.store.constants.MySqlTypeConstant;
 @Table(name = "test")
 public class Test{
 
-	@Column(name = "id",type = MySqlTypeConstant.INT,length = 11)
+	@Column(name = "id",type = MySqlTypeConstant.INT,length = 11,isKey = true,isAutoIncrement=true)
 	private int		id;
 
 	@Column(name = "name",type = MySqlTypeConstant.VARCHAR,length = 111)
@@ -20,11 +20,11 @@ public class Test{
 
 	@Column(name = "create_time",type = MySqlTypeConstant.DATETIME,length = 0)
 	private Date	create_time;
-	//
-	// @Column(name = "update_time", type = MySqlTypeConstant.DATETIME, length = 0)
-	// private Date update_time;
 
-	@Column(name = "number",type = MySqlTypeConstant.DECIMAL,length = 5,decimalLength = 1,isKey = true,isNull = false)
+	@Column(name = "update_time",type = MySqlTypeConstant.DATETIME,length = 0)
+	private Date	update_time;
+
+	@Column(name = "number",type = MySqlTypeConstant.DECIMAL,length = 5,decimalLength = 1,isNull = false)
 	private Long	number;
 
 	@Column(name = "lifecycle",type = MySqlTypeConstant.CHAR,length = 1)
@@ -57,13 +57,13 @@ public class Test{
 		this.create_time = create_time;
 	}
 
-	// public Date getUpdate_time(){
-	// return update_time;
-	// }
-	//
-	// public void setUpdate_time(Date update_time){
-	// this.update_time = update_time;
-	// }
+	 public Date getUpdate_time(){
+	 return update_time;
+	 }
+	
+	 public void setUpdate_time(Date update_time){
+	 this.update_time = update_time;
+	 }
 
 	public String getDescription(){
 		return description;

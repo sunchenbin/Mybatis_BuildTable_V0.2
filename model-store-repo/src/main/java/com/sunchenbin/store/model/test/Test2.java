@@ -9,22 +9,25 @@ import com.sunchenbin.store.constants.MySqlTypeConstant;
 @Table(name = "test2")
 public class Test2{
 
-	@Column(name = "id",type = MySqlTypeConstant.INT,length = 11,isNull = false,isKey = true,isAutoIncrement = true)
+	@Column(name = "id",type = MySqlTypeConstant.INT,length = 11,isNull = false)
 	private int		id;
 
 	@Column(name = "name",type = MySqlTypeConstant.VARCHAR,length = 100,defaultValue="dsfw")
 	private String	name;
 
-	@Column(name = "description",type = MySqlTypeConstant.TEXT,length = 1000)
+	@Column(name = "description",type = MySqlTypeConstant.VARCHAR,length = 500)
 	private String	description;
+	
+	@Column(name = "create_time",type = MySqlTypeConstant.DATETIME,length = 0)
+	private Date	create_time;
 
-	@Column(name = "update_time",type = MySqlTypeConstant.DATETIME,length = 111,isNull=false)
-	private Date	update_time;
+//	@Column(name = "update_time",type = MySqlTypeConstant.DATETIME,length = 111,isNull=false)
+//	private Date	update_time;
 
-	@Column(name = "number",type = MySqlTypeConstant.INT,length = 8)
+	@Column(name = "number",type = MySqlTypeConstant.INT,length = 8,isKey = true,isAutoIncrement = true)
 	private Long	number;
 
-	@Column(name = "lifecycle",type = MySqlTypeConstant.CHAR,length = 3)
+	@Column(name = "lifecycle",type = MySqlTypeConstant.CHAR,length = 5)
 	private String	lifecycle;
 
 	public int getId(){
@@ -43,13 +46,13 @@ public class Test2{
 		this.name = name;
 	}
 
-	public Date getUpdate_time(){
-		return update_time;
-	}
-
-	public void setUpdate_time(Date update_time){
-		this.update_time = update_time;
-	}
+//	public Date getUpdate_time(){
+//		return update_time;
+//	}
+//
+//	public void setUpdate_time(Date update_time){
+//		this.update_time = update_time;
+//	}
 
 	public String getDescription(){
 		return description;
@@ -73,6 +76,14 @@ public class Test2{
 
 	public void setLifecycle(String lifecycle){
 		this.lifecycle = lifecycle;
+	}
+	
+	public Date getCreate_time(){
+		return create_time;
+	}
+
+	public void setCreate_time(Date create_time){
+		this.create_time = create_time;
 	}
 
 }
