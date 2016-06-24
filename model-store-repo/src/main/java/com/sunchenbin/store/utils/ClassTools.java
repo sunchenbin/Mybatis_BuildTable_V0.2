@@ -3,14 +3,11 @@ package com.sunchenbin.store.utils;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.net.JarURLConnection;
 import java.net.URL;
 import java.net.URLDecoder;
-import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -163,26 +160,5 @@ public class ClassTools{
 				}
 			}
 		}
-	}
-	
-	/**
-	 * 取出list对象中的某个属性的值作为list返回
-	 * @param objList
-	 * @param fieldName
-	 * @return
-	 */
-	public static <T, E> List<E> getPropertyValueList(List<T> objList, String fieldName){
-		List<E> list = new ArrayList<E>();
-		try{
-			for (T object : objList){
-				Field field = object.getClass().getDeclaredField(fieldName);
-				field.setAccessible(true);
-				list.add((E) field.get(object));
-			}
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		
-		return list;
 	}
 }

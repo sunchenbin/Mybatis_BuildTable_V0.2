@@ -1,11 +1,14 @@
 package com.sunchenbin.store.manager.system;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Properties;
 import java.util.Set;
 
 import javax.annotation.PostConstruct;
@@ -14,6 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +28,9 @@ import com.sunchenbin.store.command.CreateTableParam;
 import com.sunchenbin.store.command.SysMysqlColumns;
 import com.sunchenbin.store.constants.MySqlTypeConstant;
 import com.sunchenbin.store.dao.system.CreateMysqlTablesMapper;
+import com.sunchenbin.store.feilong.core.util.CollectionsUtil;
+import com.sunchenbin.store.feilong.core.util.PropertiesUtil;
+import com.sunchenbin.store.feilong.core.util.Validator;
 import com.sunchenbin.store.utils.ClassTools;
 
 /**
@@ -141,7 +148,7 @@ public class SysMysqlCreateTableManagerImpl implements SysMysqlCreateTableManage
 
 				// 从sysColumns中取出我们需要比较的列的List
 				// 先取出name用来筛选出增加和删除的字段
-				List<String> columnNames = ClassTools.getPropertyValueList(tableColumnList, SysMysqlColumns.COLUMN_NAME);
+				List<String> columnNames = CollectionsUtil.getPropertyValueList(tableColumnList, SysMysqlColumns.COLUMN_NAME);
 
 				// 验证对比从model中解析的fieldList与从数据库查出来的columnList
 				// 1. 找出增加的字段
@@ -291,7 +298,7 @@ public class SysMysqlCreateTableManagerImpl implements SysMysqlCreateTableManage
 				}
 
 				// 6.验证默认值
-				if (sysColumn.getColumn_default() == null || sysColumn.getColumn_default().equals("")) {
+				if (Validator.isNullOrEmpty(sysColumn.getColumn_default())) {
 					// 数据库默认值是null，model中注解设置的默认值不为NULL时，那么需要更新该字段
 					if (!"NULL".equals(createTableParam.getFieldDefaultValue())) {
 						modifyFieldList.add(createTableParam);

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sunchenbin.store.feilong.core.tools.jsonlib.JsonUtil;
 import com.sunchenbin.store.manager.test.TestManager;
 import com.sunchenbin.store.model.test.Test;
 
@@ -26,7 +27,7 @@ public class TestController{
 		int count = testManager.findTestCount();
 		System.out.println(count);
 		List<Test> testList = testManager.findTest(test);
-//		String json = JsonUtil.format(testList);
-		return "lalala";
+		String json = JsonUtil.format(testList);
+		return json;
 	}
 }
