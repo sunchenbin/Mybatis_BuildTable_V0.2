@@ -176,6 +176,7 @@ public class ClassTools{
 		try{
 			for (T object : objList){
 				Field field = object.getClass().getDeclaredField(fieldName);
+				field.setAccessible(true);
 				list.add((E) field.get(object));
 			}
 		}catch (Exception e){
