@@ -4,10 +4,13 @@ import java.sql.Date;
 
 import com.sunchenbin.store.annotation.Column;
 import com.sunchenbin.store.annotation.Table;
+import com.sunchenbin.store.command.BaseModel;
 import com.sunchenbin.store.constants.MySqlTypeConstant;
 
 @Table(name = "test")
-public class Test{
+public class Test extends BaseModel{
+
+	private static final long serialVersionUID = 5199200306752426433L;
 
 	@Column(name = "id",type = MySqlTypeConstant.INT,length = 11,isNull=false,isKey = true,isAutoIncrement=true)
 	private int		id;
