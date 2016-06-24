@@ -1,11 +1,14 @@
 package com.sunchenbin.store.manager.system;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Properties;
 import java.util.Set;
 
 import javax.annotation.PostConstruct;
@@ -13,6 +16,8 @@ import javax.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +29,7 @@ import com.sunchenbin.store.command.SysMysqlColumns;
 import com.sunchenbin.store.constants.MySqlTypeConstant;
 import com.sunchenbin.store.dao.system.CreateMysqlTablesMapper;
 import com.sunchenbin.store.feilong.core.util.CollectionsUtil;
+import com.sunchenbin.store.feilong.core.util.PropertiesUtil;
 import com.sunchenbin.store.feilong.core.util.Validator;
 import com.sunchenbin.store.utils.ClassTools;
 
@@ -43,7 +49,17 @@ public class SysMysqlCreateTableManagerImpl implements SysMysqlCreateTableManage
 	@Autowired
 	private CreateMysqlTablesMapper	createMysqlTablesMapper;
 	
-	public static String pack = "com.sunchenbin.store.model";
+	/**
+	 * 要扫描的model所在的pack
+	 */
+	@Value("#{configProperties['mybatis.model.pack']}")	
+	private String pack;
+	
+	/**
+	 * 自动创建模式：update表示更新，create表示删除原表重新创建
+	 */
+	@Value("#{configProperties['mybatis.table.auto']}")
+	private String tableAuto;
 
 	/**
 	 * 读取配置文件的三种状态（创建表、更新表、不做任何事情）
@@ -69,7 +85,7 @@ public class SysMysqlCreateTableManagerImpl implements SysMysqlCreateTableManage
 
 		// 用于存需要删除主键的表名+结构
 		Map<String, List<Object>> dropKeyTableMap = new HashMap<String, List<Object>>();
-
+		
 		// 构建出全部表的增删改的map
 		allTableMapConstruct(mySqlTypeAndLengthMap, classes, newTableMap, modifyTableMap, addTableMap, removeTableMap, dropKeyTableMap);
 
@@ -96,6 +112,7 @@ public class SysMysqlCreateTableManagerImpl implements SysMysqlCreateTableManage
 			Map<String, List<Object>> addTableMap,
 			Map<String, List<Object>> removeTableMap,
 			Map<String, List<Object>> dropKeyTableMap){
+		
 		for (Class<?> clas : classes){
 
 			Table table = clas.getAnnotation(Table.class);
@@ -113,6 +130,11 @@ public class SysMysqlCreateTableManagerImpl implements SysMysqlCreateTableManage
 
 			// 迭代出所有model的所有fields存到newFieldList中
 			tableFieldsConstruct(mySqlTypeAndLengthMap, clas, newFieldList);
+			
+			// 如果配置文件配置的是create，表示将所有的表删掉重新创建
+			if("create".equals(tableAuto)){
+				createMysqlTablesMapper.dorpTableByName(table.name());
+			}
 
 			// 先查该表是否以存在
 			int exist = createMysqlTablesMapper.findTableCountByTableName(table.name());

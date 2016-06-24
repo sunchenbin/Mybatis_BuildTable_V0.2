@@ -23,6 +23,18 @@
 	<!-- 自动扫描(自动注入) -->
 	<context:component-scan base-package="com.sunchenbin.store.manager.*" />
 	
+	<bean id="configProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="locations">
+            <list>
+                <value>classpath*:config/autoCreateTable.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
+        <property name="properties" ref="configProperties" />
+    </bean>
+	
 	<!-- 配置数据源 -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName">
@@ -65,6 +77,7 @@
 		<!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->
 		<property name="mapperLocations" value="classpath*:com/sunchenbin/store/mapping/*/*.xml" />
 		<property name="typeAliasesPackage" value="com.sunchenbin.store.model.*,com.sunchenbin.store.command" />
+		<!-- <property name="configLocation" value="classpath:core/mybatis-configuration.xml" /> -->
 	</bean>
 	
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">

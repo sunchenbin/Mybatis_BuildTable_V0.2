@@ -59,4 +59,10 @@ public interface CreateMysqlTablesMapper {
 	 * @param tableMap
 	 */
 	public void dropKeyTableField(@Param("tableMap") Map<String, Object> tableMap);
+	
+	/**
+	 * 根据表名删除表
+	 * @param tableName
+	 */
+	public void dorpTableByName(@Param("tableName") String tableName);
 }

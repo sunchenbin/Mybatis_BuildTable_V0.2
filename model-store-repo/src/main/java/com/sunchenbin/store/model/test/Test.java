@@ -9,7 +9,7 @@ import com.sunchenbin.store.constants.MySqlTypeConstant;
 @Table(name = "test")
 public class Test{
 
-	@Column(name = "id",type = MySqlTypeConstant.INT,length = 11,isKey = true,isAutoIncrement=true)
+	@Column(name = "id",type = MySqlTypeConstant.INT,length = 11,isNull=false,isKey = true,isAutoIncrement=true)
 	private int		id;
 
 	@Column(name = "name",type = MySqlTypeConstant.VARCHAR,length = 111)

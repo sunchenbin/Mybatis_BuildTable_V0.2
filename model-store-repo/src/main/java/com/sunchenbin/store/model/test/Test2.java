@@ -24,7 +24,7 @@ public class Test2{
 //	@Column(name = "update_time",type = MySqlTypeConstant.DATETIME,length = 111,isNull=false)
 //	private Date	update_time;
 
-	@Column(name = "number",type = MySqlTypeConstant.INT,length = 8,isKey = true,isAutoIncrement = true)
+	@Column(name = "number",type = MySqlTypeConstant.INT,length = 8,isNull=false,isKey = true,isAutoIncrement = true)
 	private Long	number;
 
 	@Column(name = "lifecycle",type = MySqlTypeConstant.CHAR,length = 5)

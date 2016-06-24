@@ -107,4 +107,9 @@
 		
 	</select>
 	
+	<!-- 验证表是否存在 -->
+	<select id="dorpTableByName" parameterType="String">
+		DROP TABLE IF EXISTS `${tableName}`;
+	</select>
+	
 </mapper>
