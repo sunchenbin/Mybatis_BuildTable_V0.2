@@ -12,10 +12,10 @@ public class Test2 extends BaseModel{
 
 	private static final long serialVersionUID = -6621260971750731875L;
 
-	@Column(name = "id",type = MySqlTypeConstant.INT,length = 11,isNull = false)
-	private int		id;
+	@Column(name = "id",type = MySqlTypeConstant.INT,length = 11,isNull = false,isKey = true,isAutoIncrement = true)
+	private Integer	id;
 
-	@Column(name = "name",type = MySqlTypeConstant.VARCHAR,length = 100,defaultValue="dsfw")
+	@Column(name = "name",type = MySqlTypeConstant.VARCHAR,length = 500,defaultValue="dsfw")
 	private String	name;
 
 	@Column(name = "description",type = MySqlTypeConstant.VARCHAR,length = 500)
@@ -27,17 +27,17 @@ public class Test2 extends BaseModel{
 //	@Column(name = "update_time",type = MySqlTypeConstant.DATETIME,length = 111,isNull=false)
 //	private Date	update_time;
 
-	@Column(name = "number",type = MySqlTypeConstant.INT,length = 8,isNull=false,isKey = true,isAutoIncrement = true)
+	@Column(name = "number",type = MySqlTypeConstant.INT,length = 8,isNull=false)
 	private Long	number;
 
 	@Column(name = "lifecycle",type = MySqlTypeConstant.CHAR,length = 5)
 	private String	lifecycle;
 
-	public int getId(){
+	public Integer getId(){
 		return id;
 	}
 
-	public void setId(int id){
+	public void setId(Integer id){
 		this.id = id;
 	}
 

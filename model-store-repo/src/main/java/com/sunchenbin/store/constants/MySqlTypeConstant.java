@@ -35,4 +35,10 @@ public class MySqlTypeConstant {
 	
 	@LengthCount
 	public static final  String CHAR = "char";
+	
+	/**
+	 * 等于java中的long
+	 */
+	@LengthCount
+	public static final  String BIGINT = "bigint";
 }

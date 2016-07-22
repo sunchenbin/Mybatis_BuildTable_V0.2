@@ -13,7 +13,7 @@ public class Test extends BaseModel{
 	private static final long serialVersionUID = 5199200306752426433L;
 
 	@Column(name = "id",type = MySqlTypeConstant.INT,length = 11,isNull=false,isKey = true,isAutoIncrement=true)
-	private int		id;
+	private Integer	id;
 
 	@Column(name = "name",type = MySqlTypeConstant.VARCHAR,length = 111)
 	private String	name;
@@ -27,7 +27,7 @@ public class Test extends BaseModel{
 	@Column(name = "update_time",type = MySqlTypeConstant.DATETIME,length = 0)
 	private Date	update_time;
 
-	@Column(name = "number",type = MySqlTypeConstant.DECIMAL,length = 5,decimalLength = 1,isNull = false)
+	@Column(name = "number",type = MySqlTypeConstant.BIGINT,isNull = false)
 	private Long	number;
 
 	@Column(name = "lifecycle",type = MySqlTypeConstant.CHAR,length = 1)
@@ -36,11 +36,11 @@ public class Test extends BaseModel{
 	@Column(name = "dekes",type = MySqlTypeConstant.DOUBLE,length = 5,decimalLength = 2)
 	private Double	dekes;
 
-	public int getId(){
+	public Integer getId(){
 		return id;
 	}
 
-	public void setId(int id){
+	public void setId(Integer id){
 		this.id = id;
 	}
 
