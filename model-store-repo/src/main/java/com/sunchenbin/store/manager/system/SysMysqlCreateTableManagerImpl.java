@@ -13,6 +13,7 @@ import java.util.Set;
 
 import javax.annotation.PostConstruct;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -407,6 +408,11 @@ public class SysMysqlCreateTableManagerImpl implements SysMysqlCreateTableManage
 	 */
 	private void tableFieldsConstruct(Map<String, Object> mySqlTypeAndLengthMap,Class<?> clas,List<Object> newFieldList){
 		Field[] fields = clas.getDeclaredFields();
+		// 判断是否有父类，如果有拉取父类的field
+		if(clas.getSuperclass()!=null){
+			Class clsSup = clas.getSuperclass();
+			fields = (Field[]) ArrayUtils.addAll(fields,clsSup.getDeclaredFields());
+		}
 
 		for (Field field : fields){
 			// 判断方法中是否有指定注解类型的注解
