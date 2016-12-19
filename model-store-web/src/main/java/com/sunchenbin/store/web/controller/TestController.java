@@ -2,6 +2,7 @@ package com.sunchenbin.store.web.controller;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,8 @@ import com.sunchenbin.store.model.test.Test;
 @Controller
 public class TestController{
 
+	private final Logger LOGGER = Logger.getLogger(TestController.class.getName());  
+	
 	@Autowired
 	private TestManager testManager;
 	
@@ -27,6 +30,9 @@ public class TestController{
 	@RequestMapping("/testDate")
 	@ResponseBody
 	public String testDate(){
+		LOGGER.info("111111111111111111");
+		LOGGER.debug("111111111111111111");
+		LOGGER.warn("111111111111111111");
 		Test test = new Test();
 		test.setName("aaae333");
 		test.setNumber(9L);
