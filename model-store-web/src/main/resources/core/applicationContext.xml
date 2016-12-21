@@ -87,4 +87,16 @@
 	
 	<tx:annotation-driven transaction-manager="transactionManager" />
 	
+	<!-- Load Balanced HttpSolrServer -->
+	<bean id="solrServer" class="org.apache.solr.client.solrj.impl.LBHttpSolrServer">
+		<constructor-arg>
+			<list>
+				<value>${solr.solrServerUrl}</value>
+			</list>
+		</constructor-arg>
+		<property name="soTimeout" value="1000" />
+		<property name="connectionTimeout" value="10000" />
+	</bean>
+	
 </beans>
+

@@ -241,6 +241,12 @@
 	        <version>1.2</version>
 	    </dependency>
 		
+		<!-- solr -->
+		<dependency>
+	        <groupId>org.apache.solr</groupId>
+	        <artifactId>solr-solrj</artifactId>
+	        <version>3.6.2</version>
+	    </dependency>
 	</dependencies>
 	<build>
 		<resources>
